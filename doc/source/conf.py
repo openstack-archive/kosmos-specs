@@ -26,6 +26,9 @@ extensions = [
     #'sphinx.ext.intersphinx',
     'oslosphinx',
     'yasfb',
+    'sphinx.ext.graphviz',
+    'sphinxcontrib.seqdiag',
+    'sphinxcontrib.httpdomain',
 ]
 
 # Feed configuration for yasfb
