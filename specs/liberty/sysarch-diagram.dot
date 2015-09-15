@@ -1,0 +1,108 @@
+digraph{
+
+    label="Kosmos System Overview";
+    overlap="ortho";
+    fontname="sans-serif"
+
+    subgraph cluster_api_service {
+        fontname="sans-serif"
+        label="API Service";
+        fontsize=12
+
+        WSGI[label="WSGI API", fontname="sans-serif", fontsize=10];
+    }
+
+    subgraph cluster_keystone {
+        fontname="sans-serif"
+        label="Keystone";
+        fontsize=12
+        style="dashed"
+
+        Keystone[label="Keystone API", fontname="sans-serif", fontsize=10, style="dotted"];
+    }
+
+    subgraph cluster_conductor_service {
+        fontname="sans-serif"
+        label="Conductor Service";
+        fontsize=12
+
+        Conductor[label="Conductor", fontname="sans-serif", fontsize=10];
+        Database[label="Database", fontname="sans-serif", fontsize=10, shape="folder"];
+    }
+
+    subgraph cluster_engine_service {
+        fontname="sans-serif"
+        label="Engine Service";
+        fontsize=12
+
+        node[shape=record];
+        Engine[label="<f0> Engine|<f1> GSLB Plugin Interface |<f2> Status Check Consumer", fontname="sans-serif", fontsize=10];
+        PluginDriver[label="GSLB Plugin Driver", fontname="sans-serif", fontsize=10, shape="component"]
+    }
+
+    subgraph cluster_gslb_appliance {
+        fontname="sans-serif"
+        fontsize=12
+        label="GSLB Appliance";
+        style="dashed"
+
+        Applicance[label="GSLB Traffic Director", fontname="sans-serif", fontsize=10, style="dotted"];
+        ApplicanceAPI[label="GSLB Appliance API", fontname="sans-serif", fontsize=10, style="dotted"];
+    }
+
+    subgraph cluster_status_checks {
+        fontname="sans-serif"
+        fontsize=12
+        label="Status Check Service";
+
+        Worker[label="Status Checking Worker", fontname="sans-serif", fontsize=10];
+
+        node[shape=record];
+        Checks[label="<f0> Build In Checks Interface |<f1> GSLB Plugin Checks Interface", fontname="sans-serif", fontsize=10];
+
+        BuiltInChecks[label="Built In Status Checks", fontname="sans-serif", fontsize=10]
+        PluginChecks[label="Plugin Status Checks", fontname="sans-serif", fontsize=10, shape="component"]
+    }
+
+    subgraph cluster_endpoints {
+        fontname="sans-serif"
+        fontsize=12
+        label="Endpoints";
+        style="dashed"
+
+        Endpoint1[label="Endpoint", fontname="sans-serif", fontsize=10, style="dotted"];
+        Endpoint2[label="Endpoint", fontname="sans-serif", fontsize=10, style="dotted"];
+        Endpoint3[label="Endpoint", fontname="sans-serif", fontsize=10, style="dotted"];
+
+    }
+
+
+    AdminUser[label="GSLB User", fontname="sans-serif", fontsize=10, style="dashed"];
+
+    AdminUser -> WSGI [dir="both"];
+
+    Keystone -> WSGI [dir="both"];
+
+    WSGI -> Conductor:f0 [dir="both"];
+
+    Conductor -> Database [dir="both"];
+
+    Engine:f0 -> Conductor [dir="both"];
+
+    Engine:f1 -> PluginDriver [dir="both"];
+    PluginDriver -> ApplicanceAPI [dir="both"];
+
+    Applicance -> ApplicanceAPI [dir="both"];
+
+    Worker -> Engine:f2;
+    Worker -> Checks [dir="both"];
+    Checks:f0 -> BuiltInChecks
+    Checks:f1 -> PluginChecks
+    BuiltInChecks -> {Endpoint1, Endpoint2, Endpoint3}
+    PluginChecks -> {Endpoint1, Endpoint2, Endpoint3}
+
+    EndUser[label="End User", fontname="sans-serif", fontsize=10, style="dashed"];
+
+    EndUser -> Applicance
+    Applicance -> {Endpoint1, Endpoint2, Endpoint3}
+}
