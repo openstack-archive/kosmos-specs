@@ -1,0 +1,34 @@
+digraph "Kosmos"{
+    rankdir=TB
+    node [ fontname="sans-serif"fontsize=10 ];
+    edge [ fontname="sans-serif"fontsize=10 ];
+    label="kosmos-engine";
+    overlap="ortho";
+    fontname="sans-serif"
+    newrank=true
+
+    Conductor [style="invisible"]
+
+    subgraph cluster_engine_service {
+        fontname="sans-serif"
+        label="kosmos-engine";
+        fontsize=12
+
+        node[shape=record];
+        Engine[label="<f0> Engine|<f1> GSLB Plugin Interface |<f2> Status Check Consumer"];
+        PluginDriver[label="GSLB Plugin Driver", shape="component"]
+    }
+
+
+    ApplicanceAPI [style="invisible"]
+    Worker [style="invisible"]
+
+    Engine:f0 -> Conductor [label="kosmos-conductor"];
+
+    Engine:f1 -> PluginDriver [dir="both"];
+    PluginDriver -> ApplicanceAPI [dir="both" label="GSLB Appliance API"];
+
+
+    Worker -> Engine:f2[label="kosmos-status-checker"];
+
+}

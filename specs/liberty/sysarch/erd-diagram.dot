@@ -1,0 +1,103 @@
+digraph "models_diagram" {
+    graph[overlap=false, splines=true, fontname="sans-serif", fontsize=10 ]
+    node [ fontname="sans-serif"fontsize=10 ];
+    edge [ fontname="sans-serif"fontsize=10 ];
+
+
+    "LB" [shape=record, label="{\
+      loadbalancers|
+      id :uuid\l\
+      project_id :string\l\
+      domain_id :string\l\
+      name :string\l\
+      description :string\l\
+      fqdn :string\l\
+      zone_name :string\l\
+    }"]
+
+    "Pools" [shape=record, label="{\
+      pools|\l\
+      id :uuid\l\
+      project_id :string\l\
+      domain_id :string\l\
+      name :string\l\
+      description :string\l\
+      flavor :enum\l\
+    }"]
+
+    "PoolMembers" [shape=record, label="{\
+      pool_members|\l\
+      id :uuid\l\
+      project_id :string\l\
+      domain_id :string\l\
+      pool_id :string\l\
+      name :string\l\
+      description :string\l\
+      type :enum\l\
+    }"]
+
+    "PoolMemberParameters" [shape=record, label="{\
+      pool_member_parameters|\l\
+      id :uuid\l\
+      project_id :string\l\
+      domain_id :string\l\
+      pool_member_id :string\l\
+      key :enum\l\
+      value :string\l\
+    }"]
+
+    "Pools" [shape=record, label="{\
+      pools|\l\
+      id :uuid\l\
+      project_id :string\l\
+      domain_id :string\l\
+      name :string\l\
+      description :string\l\
+    }"]
+
+    "Monitors" [shape=record, label="{\
+      monitors|\l\
+      id :uuid\l\
+      project_id :string\l\
+      domain_id :string\l\
+      name :string\l\
+      description :string\l\
+      type :string\l\
+      target :string\l\
+      auth :bool\l\
+    }"]
+
+    "MonitorParameters" [shape=record, label="{\
+      monitor_parameters|\l\
+      id :uuid\l\
+      project_id :string\l\
+      domain_id :string\l\
+      monitor_id :uuid\l\
+      key :enum\l\
+      value :string\l\
+    }"]
+
+    "LoadbalancersMonitor" [shape=record, label="{\
+      loadbalancers_monitors|\l\
+      loadbalancer_id :uuid\l\
+      monitor_id :uuid\l\
+    }"]
+
+    "LoadbalancersPools" [shape=record, label="{\
+      loadbalancers_pools|\l\
+      loadbalancer_id :uuid\l\
+      pools_id :uuid\l\
+    }"]
+    
+    { rank=same; "LoadbalancersPools" "LoadbalancersMonitor" }
+    { rank=same; "Monitors" "MonitorParameters" }
+    { rank=same; "PoolMembers" "PoolMemberParameters" }
+
+    "LB" -> "LoadbalancersPools" [arrowtail=odot, arrowhead=crow, dir=both]
+    "LB" -> "LoadbalancersMonitor" [arrowtail=odot, arrowhead=crow, dir=both]
+    "LoadbalancersPools" -> "Pools" [arrowtail=crow, arrowhead=odot, dir=both]
+    "LoadbalancersMonitor" -> "Monitors" [arrowtail=crow, arrowhead=odot, dir=both]
+    "Monitors" -> "MonitorParameters" [arrowtail=odot, arrowhead=crow, dir=both]
+    "Pools" -> "PoolMembers" [arrowtail=odot, arrowhead=crow, dir=both]
+    "PoolMembers" -> "PoolMemberParameters" [arrowtail=odot, arrowhead=crow, dir=both]
+}
