@@ -4,7 +4,7 @@
    contain the root `toctree` directive.
 
 kosmos-specs Design Specifications
-==================================================
+==================================
 
 Liberty approved specs:
 
@@ -22,9 +22,16 @@ Mitaka approved specs:
 
    specs/mitaka/*
 
+Current release specs:
+
+.. toctree::
+   :glob:
+   :maxdepth: 1
+
+   specs/pike/*
 
 kosmos-specs Repository Information
-===================================================
+===================================
 
 .. toctree::
    :maxdepth: 2
