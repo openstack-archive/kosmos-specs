@@ -129,5 +129,5 @@ Milestones
 Target Milestone for completion:
   M-2
 
-.. _Designate: http://wiki.openstack.org/wiki/Designate
+.. _Designate: https://wiki.openstack.org/wiki/Designate
 .. _LBaaS V2: http://https://wiki.openstack.org/wiki/Neutron/LBaaS

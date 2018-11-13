@@ -36,9 +36,9 @@ Load Balancer JSON Snippet
       "flavor": "example_1",
       "status": "ACTIVE",
       "links": {
-        "self": "http://example.gslb.openstack.org/v0.1/gslbs/f9fc6210-8efa-4492-9b4f-d87ba98f35b8",
-        "pools": "http://example.gslb.openstack.org/v0.1/gslbs/f9fc6210-8efa-4492-9b4f-d87ba98f35b8/pools",
-        "status": "http://example.gslb.openstack.org/v0.1/gslbs/f9fc6210-8efa-4492-9b4f-d87ba98f35b8/status"
+        "self": "https://example.gslb.openstack.org/v0.1/gslbs/f9fc6210-8efa-4492-9b4f-d87ba98f35b8",
+        "pools": "https://example.gslb.openstack.org/v0.1/gslbs/f9fc6210-8efa-4492-9b4f-d87ba98f35b8/pools",
+        "status": "https://example.gslb.openstack.org/v0.1/gslbs/f9fc6210-8efa-4492-9b4f-d87ba98f35b8/status"
       }
     }
 
@@ -55,9 +55,9 @@ Pool JSON Snippet
       "status": "ACTIVE",
       "members":["SEE MEMBER SNIPPETS BELOW"],
       "links": {
-        "self": "http://example.gslb.openstack.org/v0.1/pools/f9fc6210-8efa-4492-9b4f-d87ba98f35b8",
-        "pool_members": "http://example.gslb.openstack.org/v0.1/pools/f9fc6210-8efa-4492-9b4f-d87ba98f35b8/pool_members",
-        "status": "http://example.gslb.openstack.org/v0.1/pools/f9fc6210-8efa-4492-9b4f-d87ba98f35b8/status"
+        "self": "https://example.gslb.openstack.org/v0.1/pools/f9fc6210-8efa-4492-9b4f-d87ba98f35b8",
+        "pool_members": "https://example.gslb.openstack.org/v0.1/pools/f9fc6210-8efa-4492-9b4f-d87ba98f35b8/pool_members",
+        "status": "https://example.gslb.openstack.org/v0.1/pools/f9fc6210-8efa-4492-9b4f-d87ba98f35b8/status"
       }
     }
 
